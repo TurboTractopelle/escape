@@ -31,9 +31,27 @@ describe("get Paris data", () => {
       });
   });
 
+  it("doesnt crach if no ressource when asked", () => {
+    return request(server)
+      .get("/parisss")
+      .expect(404);
+  });
+
   it("drop the db when asked", () => {
     return request(server)
       .post("/drop")
+      .expect(200);
+  });
+});
+
+describe("post ville", () => {
+  afterAll(() => {
+    connection.close();
+  });
+
+  it("can add some ville", () => {
+    return request(server)
+      .post("/paris")
       .expect(200);
   });
 });

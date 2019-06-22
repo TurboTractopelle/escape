@@ -22,10 +22,9 @@ function test(req, res, next) {
 async function postParis(req, res, next) {
   try {
     await Villes.create({ name: "Paris", hab: 10 });
-    res.send("Paris added");
     next();
   } catch (e) {
-    console.log(e);
+    res.send("error");
   }
 }
 
@@ -35,9 +34,7 @@ async function getParis(req, res, next) {
     res.header("content-type", "json");
     res.send(data);
     next();
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 }
 
 async function drop(req, res, next) {

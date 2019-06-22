@@ -11,3 +11,6 @@ POST {{host}}/paris
 
 ### get paris
 GET {{host}}/paris
+
+### get parisss
+GET {{host}}/parisss

@@ -1,4 +1,4 @@
-@host = http://localhost:3000
+@host = http://localhost:5000
 
 ### get test
 GET {{host}}/test
@@ -6,11 +6,15 @@ GET {{host}}/test
 ### drop 
 POST {{host}}/drop
 
-### post paris
-POST {{host}}/paris
+### post villes
+POST {{host}}/addville
+Content-Type: application/json
 
-### get paris
-GET {{host}}/paris
+< ./src/fixtures/fakedata.json
 
-### get parisss
-GET {{host}}/parisss
+
+### get reims
+GET {{host}}/villes/Reims
+
+### get villes
+GET {{host}}/villes

@@ -7,8 +7,7 @@ const options = {
   useNewUrlParser: true,
   connectTimeoutMS: 10000,
   reconnectInterval: 100,
-  useCreateIndex: true,
-  replset: 30000
+  useCreateIndex: true
 };
 
 const connection = mongoose.createConnection(url, options);

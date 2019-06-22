@@ -8,8 +8,8 @@ const connection = require("../db/connection");
 function villesRoutes(server) {
   server.get("/test", test);
   server.post("/drop", drop);
-  server.post("/paris", postParis);
-  server.get("/paris", getParis);
+  server.post("/addville", addVille);
+  server.get("/villes/:ville", getVille);
   server.get("/villes", getVilles);
   return server;
 }
@@ -20,18 +20,21 @@ function test(req, res, next) {
   next();
 }
 
-async function postParis(req, res, next) {
+async function addVille(req, res, next) {
   try {
-    await Villes.create({ name: "Paris", hab: 10 });
+    await Villes.insertMany(req.body);
+    res.send("added");
     next();
   } catch (e) {
     res.send("error");
   }
 }
 
-async function getParis(req, res, next) {
+async function getVille(req, res, next) {
   try {
-    const data = await Villes.find({ name: "Paris" });
+    console.log(req.params);
+    const { ville } = req.params;
+    const data = await Villes.find({ name: ville });
     res.header("content-type", "json");
     res.send(data);
     next();
@@ -47,7 +50,7 @@ async function drop(req, res, next) {
 }
 
 async function getVilles(req, res, next) {
-  const data = await Villes.find();
+  const data = await Villes.find().sort({ name: 1 });
   res.send(data);
   next();
 }

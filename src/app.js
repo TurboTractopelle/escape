@@ -7,7 +7,7 @@ function createServer(name = "test") {
   const server = restify.createServer();
   villesRoutes(server);
 
-  //   server.use(restify.plugins.jsonBodyParser({ mapParams: true }))
+  server.use(restify.plugins.jsonBodyParser({ mapParams: true }));
   return server;
 }
 

@@ -23,7 +23,7 @@ describe("get Paris data", () => {
 
   it("returns Paris data when asked", () => {
     return request(app)
-      .get("/paris")
+      .get("/villes/Paris")
       .expect(200)
       .then(res => {
         const { name } = res.body[0];

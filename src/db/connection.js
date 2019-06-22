@@ -5,10 +5,12 @@ const url = process.env.MONGODB_URI || global.MONGODB_URI || dburl;
 
 const options = {
   useNewUrlParser: true,
-  connectTimeoutMS: 5000,
+  connectTimeoutMS: 10000,
   reconnectInterval: 100,
-  useCreateIndex: true
+  useCreateIndex: true,
+  replset: 30000
 };
+
 const connection = mongoose.createConnection(url, options);
 
 connection.on("connection", () => console.log("gg"));

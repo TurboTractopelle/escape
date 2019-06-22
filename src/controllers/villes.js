@@ -10,6 +10,7 @@ function villesRoutes(server) {
   server.post("/drop", drop);
   server.post("/paris", postParis);
   server.get("/paris", getParis);
+  server.get("/villes", getVilles);
   return server;
 }
 
@@ -42,6 +43,12 @@ async function drop(req, res, next) {
     console.log("collection dropped");
   });
   res.send("db dropped");
+  next();
+}
+
+async function getVilles(req, res, next) {
+  const data = await Villes.find();
+  res.send(data);
   next();
 }
 

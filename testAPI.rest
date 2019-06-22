@@ -3,6 +3,9 @@
 ### get test
 GET {{host}}/test
 
+### drop 
+POST {{host}}/drop
+
 ### post paris
 POST {{host}}/paris
 

@@ -1,4 +1,5 @@
 const Villes = require("../db/Villes");
+const connection = require("../db/connection");
 
 /**
  * @param  {any} server
@@ -6,6 +7,7 @@ const Villes = require("../db/Villes");
  */
 function villesRoutes(server) {
   server.get("/test", test);
+  server.post("/drop", drop);
   server.post("/paris", postParis);
   server.get("/paris", getParis);
   return server;
@@ -36,6 +38,14 @@ async function getParis(req, res, next) {
   } catch (e) {
     console.log(e);
   }
+}
+
+async function drop(req, res, next) {
+  await connection.collections["villes"].drop(function(err) {
+    console.log("collection dropped");
+  });
+  res.send("db dropped");
+  next();
 }
 
 module.exports = villesRoutes;

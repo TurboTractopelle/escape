@@ -18,8 +18,9 @@ describe("get Paris data", () => {
   });
 
   it("returns Paris data when asked", () => {
-    request(server)
+    return request(server)
       .get("/paris")
-      .expect(200);
+      .expect(200)
+      .then(res => console.log(res.body));
   });
 });

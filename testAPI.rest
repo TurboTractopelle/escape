@@ -2,3 +2,6 @@
 
 ### get test
 GET {{host}}/test
+
+### post paris
+POST {{host}}/paris

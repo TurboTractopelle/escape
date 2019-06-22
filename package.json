@@ -15,6 +15,18 @@
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageReporters": [
+      "html",
+      "lcov",
+      "text"
+    ],
+    "notify": true,
+    "testEnvironment": "./jest/mongo-memory-environment"
+  },
   "dependencies": {
     "mongoose": "^5.6.0",
     "restify": "^8.3.3"

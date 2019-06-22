@@ -3,12 +3,14 @@
  * @returns {any} server
  */
 function villesRoutes(server) {
-  server.get("/", getHome);
+  server.get("/test", test);
   return server;
 }
 
-function getHome(req, res, next) {
-  res.send("gg");
+function test(req, res, next) {
+  res.header("content-type", "text/plain");
+  res.send("test path working");
+  next();
 }
 
 module.exports = villesRoutes;

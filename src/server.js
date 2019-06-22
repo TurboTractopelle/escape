@@ -5,10 +5,12 @@ const villesRoutes = require("./controllers/villes");
  * @param  {String} name
  * @returns - server instance
  */
-function server(name) {
+function server(name = "test") {
   console.log(`Creating ${name} server`);
-  const server = restify.createServer({ name });
+  const server = restify.createServer();
   villesRoutes(server);
+
+  //   server.use(restify.plugins.jsonBodyParser({ mapParams: true }))
   return server;
 }
 

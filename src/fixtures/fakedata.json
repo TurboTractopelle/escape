@@ -1,14 +1,17 @@
 [
   {
     "name": "Paris",
-    "hab": "10"
+    "hab": "10",
+    "social": { "score": "0", "votes": "0", "comments": [] }
   },
   {
     "name": "Reims",
-    "hab": "5"
+    "hab": "5",
+    "social": { "score": "0", "votes": "0", "comments": [] }
   },
   {
     "name": "A",
-    "hab": "1"
+    "hab": "1",
+    "social": { "score": "0", "votes": "0", "comments": [] }
   }
 ]

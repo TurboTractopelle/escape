@@ -13,6 +13,7 @@ const options = {
 const connection = mongoose.createConnection(url, options);
 
 connection.on("connection", () => console.log("gg"));
+mongoose.set("useFindAndModify", false);
 
 if (process.env.NODE_ENV !== "test") {
   connection.on("open", () => {

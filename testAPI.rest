@@ -12,9 +12,27 @@ Content-Type: application/json
 
 < ./src/fixtures/fakedata.json
 
+### post ville
+POST {{host}}/addville
+Content-Type: application/json
+
+{"name":"GG", "hab":"55", "social": { "score": "0", "votes": "0", "comments": [] }}
 
 ### get reims
 GET {{host}}/villes/Reims
 
+### vote reims
+POST {{host}}/villes/Reims
+Content-Type: application/json
+
+{"offset":"1", "comment": "du champagne"}
+
+
 ### get villes
-GET {{host}}/villes
+GET {{host}}/villes?sortBy=hab
+
+### get villes
+GET {{host}}/villes?sortBy=hhh
+
+### get villes
+GET {{host}}/villes?firstLetter=r

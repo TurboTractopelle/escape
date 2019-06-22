@@ -10,6 +10,7 @@ function villesRoutes(server) {
   server.post("/drop", drop);
   server.post("/addville", addVille);
   server.get("/villes/:ville", getVille);
+  server.post("/villes/:ville", vote);
   server.get("/villes", getVilles);
   return server;
 }
@@ -22,8 +23,8 @@ function test(req, res, next) {
 
 async function addVille(req, res, next) {
   try {
-    await Villes.insertMany(req.body);
-    res.send("added");
+    const data = await Villes.insertMany(req.body);
+    res.send(data);
     next();
   } catch (e) {
     res.send("error");
@@ -49,10 +50,44 @@ async function drop(req, res, next) {
   next();
 }
 
-async function getVilles(req, res, next) {
-  const data = await Villes.find().sort({ name: 1 });
-  res.send(data);
+async function vote(req, res, next) {
+  console.log("rec", req.body);
+  const { offset = 0, comment = "" } = req.body;
+
+  let ville = await Villes.findOne({ name: req.params.ville });
+
+  const data = await Villes.findOneAndUpdate(
+    { _id: ville.id },
+    {
+      $inc: { "social.votes": 1, "social.score": +offset },
+      $push: { "social.comments": comment }
+    },
+    { new: true }
+  );
+  res.send(201, data);
   next();
+}
+
+async function getVilles(req, res, next) {
+  const { sortBy = "name" } = req.query;
+  let { firstLetter = "" } = req.query;
+  const avaSortBy = ["name", "hab"];
+
+  if (!avaSortBy.includes(sortBy)) {
+    res.send(400, `Wrong param: ${sortBy}`);
+    next();
+  } else {
+    let data;
+    if (firstLetter) {
+      data = await Villes.find({
+        name: { $regex: `^${firstLetter}.+`, $options: "i" }
+      }).sort({ [sortBy]: -1 });
+    } else {
+      data = await Villes.find().sort({ [sortBy]: -1 });
+    }
+    res.send(data);
+    next();
+  }
 }
 
 module.exports = villesRoutes;

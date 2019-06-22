@@ -8,6 +8,7 @@ function createServer(name = "test") {
   villesRoutes(server);
 
   server.use(restify.plugins.jsonBodyParser({ mapParams: true }));
+  server.use(restify.plugins.queryParser({ mapParams: false }));
   return server;
 }
 

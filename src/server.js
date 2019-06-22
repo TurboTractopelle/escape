@@ -1,17 +1,16 @@
 const restify = require("restify");
 const villesRoutes = require("./controllers/villes");
+const connection = require("./db/connection");
+const createServer = require("./app");
+const NAME = require("./appcfg").NAME;
+const PORT = require("./appcfg").PORT;
 
-/**
- * @param  {String} name
- * @returns - server instance
- */
-function server(name = "test") {
-  console.log(`Creating ${name} server`);
-  const server = restify.createServer();
-  villesRoutes(server);
+connection.on("open", initServer);
 
-  //   server.use(restify.plugins.jsonBodyParser({ mapParams: true }))
-  return server;
+function initServer() {
+  const server = createServer();
+
+  server.listen(PORT, () =>
+    console.log(`Listening on http://localhost:${PORT}`)
+  );
 }
-
-module.exports = server;

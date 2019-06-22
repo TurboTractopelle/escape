@@ -1,8 +1,14 @@
-const createServer = require("./server");
+const restify = require("restify");
+const villesRoutes = require("./controllers/villes");
 console.log("Lancement de l'app");
-const NAME = require("./appcfg").NAME;
-const PORT = require("./appcfg").PORT;
 
-const server = createServer(NAME);
+function createServer(name = "test") {
+  console.log(`Creating ${name} server`);
+  const server = restify.createServer();
+  villesRoutes(server);
 
-server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+  //   server.use(restify.plugins.jsonBodyParser({ mapParams: true }))
+  return server;
+}
+
+module.exports = createServer;

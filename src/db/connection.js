@@ -1,11 +1,22 @@
 const mongoose = require("mongoose");
-const url = require("../appcfg").MONGO;
+const dburl = require("../appcfg").MONGO;
 
-const options = { useNewUrlParser: true };
-mongoose.connect(url, options);
+const url = process.env.MONGODB_URI || global.MONGODB_URI || dburl;
 
-const db = mongoose.connection;
+const options = {
+  useNewUrlParser: true,
+  connectTimeoutMS: 5000,
+  reconnectInterval: 100,
+  useCreateIndex: true
+};
+const connection = mongoose.createConnection(url, options);
 
-db.on("connection", () => console.log("gg"));
+connection.on("connection", () => console.log("gg"));
 
-module.exports = db;
+if (process.env.NODE_ENV !== "test") {
+  connection.on("open", () => {
+    console.log(`✅  Connected to mongoconnection database ${connection.name}`);
+  });
+}
+
+module.exports = connection;

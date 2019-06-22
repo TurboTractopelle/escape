@@ -2,9 +2,9 @@
   "name": "escape",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon src/app.js",
+    "dev": "nodemon src/server.js",
     "test": "jest --watchAll"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^24.8.0",
+    "jest-environment-node": "^24.8.0",
     "mongodb-memory-server": "^5.1.5",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"

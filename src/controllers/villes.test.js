@@ -1,5 +1,5 @@
 const request = require("supertest");
-const server = require("../server")();
+const server = require("../app")();
 const connection = require("../db/connection");
 const Villes = require("../db/Villes");
 
@@ -13,6 +13,10 @@ describe("static routes", () => {
 });
 
 describe("get Paris data", () => {
+  beforeAll(async () => {
+    await Villes.deleteMany({});
+    await Villes.insertMany({ name: "Paris" });
+  });
   afterAll(() => {
     connection.close();
   });

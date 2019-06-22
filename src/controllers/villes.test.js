@@ -21,6 +21,15 @@ describe("get Paris data", () => {
     return request(server)
       .get("/paris")
       .expect(200)
-      .then(res => console.log(res.body));
+      .then(res => {
+        const { name } = res.body[0];
+        expect(name).toBe("Paris");
+      });
+  });
+
+  it("drop the db when asked", () => {
+    return request(server)
+      .post("/drop")
+      .expect(200);
   });
 });

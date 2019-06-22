@@ -12,11 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^24.8.0",
+    "mongodb-memory-server": "^5.1.5",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   },
   "jest": {
-    "testEnvironment": "node"
+    "notify": true,
+    "testEnvironment": "./jest/mongo-memory-environment"
   },
   "dependencies": {
     "mongoose": "^5.6.0",

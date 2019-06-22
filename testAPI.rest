@@ -5,3 +5,6 @@ GET {{host}}/test
 
 ### post paris
 POST {{host}}/paris
+
+### get paris
+GET {{host}}/paris

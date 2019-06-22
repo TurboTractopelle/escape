@@ -6,7 +6,8 @@ const Villes = require("../db/Villes");
  */
 function villesRoutes(server) {
   server.get("/test", test);
-  server.post("/paris", paris);
+  server.post("/paris", postParis);
+  server.get("/paris", getParis);
   return server;
 }
 
@@ -16,9 +17,25 @@ function test(req, res, next) {
   next();
 }
 
-async function paris(req, res, next) {
-  await Villes.create({ name: "Paris", hab: 10 });
-  res.send("Paris added");
+async function postParis(req, res, next) {
+  try {
+    await Villes.create({ name: "Paris", hab: 10 });
+    res.send("Paris added");
+    next();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function getParis(req, res, next) {
+  try {
+    const data = await Villes.find({ name: "Paris" });
+    res.header("content-type", "json");
+    res.send(data);
+    next();
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 module.exports = villesRoutes;

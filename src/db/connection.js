@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const url = require("../appcfg").MONGO;
 
-mongoose.connect(url);
+const options = { useNewUrlParser: true };
+mongoose.connect(url, options);
 
 const db = mongoose.connection;
 
